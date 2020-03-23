@@ -7,7 +7,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 
 import Review from './components/Review/Review';
@@ -16,13 +15,13 @@ import NotFound from './components/NotFound/NotFound';
 import ProductDetail from './components/ProductDetail/ProductDetail';
 import Login from './components/Login/login';
 import { createContext } from 'react';
-import { AuthContextProvider } from './components/Login/useauth';
+import { AuthContextProvider, PrivateRoute } from './components/Login/useauth';
 import Shipment from './components/Shipment/Shipment';
 
 export const userContext = createContext();
 
 function App() {
-  const user = {name: 'Mahmud', email: 'yoobaby@gllgl.com'}
+
   return (
     <div >
       <AuthContextProvider>
@@ -53,9 +52,9 @@ function App() {
               <Login></Login>
             </Route>
             
-            <Route path="/shipment">
+            <PrivateRoute path="/shipment">
               <Shipment></Shipment>
-            </Route>
+            </PrivateRoute>
 
             <Route path="*"> 
               <NotFound></NotFound>

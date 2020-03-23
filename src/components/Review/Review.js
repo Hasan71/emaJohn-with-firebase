@@ -6,11 +6,14 @@ import Cart from '../Cart/Cart';
 import '../Shop/Shop.css'
 import happyImage from '../../images/giphy.gif'
 import { Link } from 'react-router-dom';
+import { useAuth } from '../Login/useauth';
 
 const Review = () => {
   
     const [cart, setCart] = useState([]);
     const [orderPlaced, setOrderPlaced] = useState(false);
+
+    const auth = useAuth();
 
     const handlePlaceOrder = () =>{
         setCart([]);
@@ -19,7 +22,7 @@ const Review = () => {
     }
 
     const removeProduct = (productKey) => {
-        // console.log("remove clicked");
+      
         const newCart = cart.filter(pd => pd.key !== productKey)
         setCart(newCart);
         removeFromDatabaseCart(productKey);
@@ -27,7 +30,7 @@ const Review = () => {
 
     useEffect(() => {
         const savedCart = getDatabaseCart();
-        // console.log(savedCart);
+      
         const porductKeys = Object.keys(savedCart);
 
         const cartProducts = porductKeys.map(key => {
@@ -54,13 +57,21 @@ const Review = () => {
             }
 
              { thankYou }
+             {
+                 !cart.length && <h1>Your cart is empty, <a href='/shop'>keep shopping! </a></h1>
+             }
 
            </div>
 
             <div className="cart-container">
                 <Cart cart={cart}> </Cart>
                     <Link to="/shipment">
-                        <button className="main-button">Proceed Checkout</button>
+                        {
+                            auth.user ? 
+                            <button className="main-button">Proceed Shipment</button>
+                            :
+                            <button className="main-button">Login to Proceed</button>
+                        }
                     </Link>
            
             </div>

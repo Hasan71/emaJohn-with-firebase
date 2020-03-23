@@ -1,0 +1,16 @@
+.form-input{
+margin: 30PX 100PX;
+}
+
+.form-input input{
+    display: block;
+    margin-top: 30PX;
+    padding: 5PX;
+    border: 1px solid gray;
+    border-radius: 5px;
+    width: 250px;
+}
+
+span{
+    color: red;
+}
