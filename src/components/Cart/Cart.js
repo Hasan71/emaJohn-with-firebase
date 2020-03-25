@@ -1,14 +1,10 @@
 import React from 'react';
-import { useAuth } from '../Login/useauth';
-
 
 const Cart = (props) => {
     const cart = props.cart;
 
-    const auth  = useAuth();
-
     const total = cart.reduce((total, prd) => total+prd.price * prd.quantity, 0);
-    // debugger;
+
 
     let shipping = 0;
     if(total>35){
@@ -43,7 +39,7 @@ const Cart = (props) => {
             {
                 props.children
             }
-            <p>{}</p>
+           
            
         </div>
     );
